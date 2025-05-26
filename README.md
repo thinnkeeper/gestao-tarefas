@@ -15,20 +15,28 @@ Versão 5 do Bootstrap
 
 ## Etapa 1: Instalação do Laravel
 Instalou-se o Laravel através do Laravel Herd v12, criando a aplicação com o comando:
-_composer create-project laravel/laravel gestao-tarefas_
+```
+composer create-project laravel/laravel gestao-tarefas
+```
 
 ## Etapa 2: Criação da Base de Dados
 Foi criada a base de dados no MySQL com o nome:
-_CREATE DATABASE gestao_tarefas;_
+```
+CREATE DATABASE gestao_tarefas;
+```
 
 As credenciais e nome da BD foram configurados no ficheiro .env:
-_DB_DATABASE=gestao_tarefas
+```
+DB_DATABASE=gestao_tarefas
 DB_USERNAME=root
-DB_PASSWORD=senha_
+DB_PASSWORD=senha
+```
 
 ## Etapa 3: Criação das Tabelas com Migrations
 Foi criada a tabela tarefas através de uma migration personalizada:
-_php artisan make:model Tarefa -m_
+```
+php artisan make:model Tarefa -m
+```
 
 Campos definidos na migration:
 
@@ -39,14 +47,20 @@ Campos definidos na migration:
 - user_id (chave estrangeira)
 
 Migration aplicada com:
-_php artisan migrate_
+```
+php artisan migrate
+```
 
 ## Etapa 4: Criação dos Controladores
 Foi criado o controlador TarefaController com as ações padrão de CRUD:
-_php artisan make:controller TarefaController --resource_
+```
+php artisan make:controller TarefaController --resource
+```
 
 Também foi criado o form request TarefaRequest para validação dos dados:
-_php artisan make:request TarefaRequest_
+```
+php artisan make:request TarefaRequest
+```
 
 
 ## Etapa 5: Configuração do Template com Blade
@@ -63,7 +77,8 @@ Views criadas para as tarefas:
 
 ## Etapa 6: Definição das Rotas
 As rotas protegidas foram declaradas em routes/web.php, incluindo:
-_Route::middleware(['auth'])->group(function () {
+```
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return redirect()->route('tarefas.index');
     })->name('dashboard');
@@ -71,12 +86,15 @@ _Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('tarefas', TarefaController::class);
-});_
+});
+```
 
 A autenticação foi configurada com Laravel Breeze:
-_composer require laravel/breeze --dev
+```
+composer require laravel/breeze --dev
 php artisan breeze:install
-php artisan migrate_
+php artisan migrate
+```
 
 ## Etapa 7: Implementação e Testes do CRUD
 Implementou-se o CRUD completo:
